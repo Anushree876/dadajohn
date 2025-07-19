@@ -1,0 +1,51 @@
+{% include "header.html" %}
+
+<div class="container my-4">
+  <div class="row">
+  
+    <!-- Products List -->
+    <div class="col-lg-8 mb-4">
+      {% for item in items %}
+      <div class="card mb-3">
+        <div class="row g-0 align-items-center">
+          <div class="col-md-4 d-flex justify-content-center">
+            <img src="{{ item.product.image_url }}" 
+                 class="img-fluid rounded-start" 
+                 alt="{{ item.product.name }}" 
+                 style="max-height: 120px; object-fit: contain;">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.product.name }}</h5>
+              <p class="card-text mb-1">
+                Price: Rs.{{ item.product.price }}
+              </p>
+              <p class="card-text">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Order Details -->
+    <div class="col-lg-4">
+      <div class="card sticky-top" style="top: 20px;">
+        <div class="card-body">
+          <h5 class="card-title">Order Details</h5>
+          <p class="card-text">
+            Total MRP : Rs.{{ total }}<br>
+            Delivery: Rs.100
+            Final Amount:Rs.{{total + 100}}
+          </p>
+          <a href="{{url_for('create_checkout_session')}}" class="btn btn-primary w-100">Checkout</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
