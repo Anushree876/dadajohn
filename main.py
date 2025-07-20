@@ -1,5 +1,5 @@
 import os
-from flask import Flask , render_template,redirect,url_for,flash,request
+from flask import Flask, render_template, redirect, url_for, flash, request, abort
 from flask_login import UserMixin,login_user,logout_user,login_required,LoginManager,current_user
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship,DeclarativeBase,Mapped,mapped_column
@@ -81,7 +81,9 @@ with app.app_context():
 @app.route("/",methods=["GET","POST"])
 def home_page():
     all_products=db.session.execute(db.select(Products)).scalars().all()
-    return render_template("home.html",products=all_products)
+
+    alert = request.args.get('alert')
+    return render_template("home.html",products=all_products,alert=alert)
 
 @app.route("/login",methods=["GET","POST"])
 def login_page():
@@ -199,9 +201,27 @@ def create_checkout_session():
     )
     return redirect(session.url,code=303)
 
+@app.route("/alert",methods=["POST"])
+def show_alert():
+    msg="Please log in to add items to your cart."
+    
+    return redirect(url_for('home_page',alert=msg))
+
 @app.route("/success",methods=["GET","POST"])
 @login_required
 def payment_success():
     return render_template("success.html")
+
+
+@app.route("/product/<int:product_id>/user/<int:user_id>",methods=["POST","GET"])
+def remove_cart_item(product_id,user_id):
+    item_to_delete=db.session.execute(db.select(CartItem).where(CartItem.user_id==user_id).where(CartItem.product_id==product_id)).scalar()
+
+    if item_to_delete:
+        db.session.delete(item_to_delete)
+        db.session.commit()
+    return redirect(url_for("cart_preview_page"))
+
+
 if __name__=="__main__":
     app.run(debug=False)

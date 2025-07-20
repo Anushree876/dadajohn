@@ -1,36 +1,70 @@
 {% include "header.html" %}
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-body-tertiary"
-style="background-image: url('/static/images/home.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    style="background-image: url('/static/images/home_img_3.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;min-height:70vh;">
     <div class="col-md-6 p-lg-5 mx-auto my-5">
-        <h1 class="display-3 fw-bold">Designed for engineers</h1>
-        <h3 class="fw-normal text-muted mb-3">Build anything you want with Aperture</h3>
-        <div class="d-flex gap-3 justify-content-center lead fw-normal"> <a class="icon-link" href="#">
-                Learn more
-                <svg class="bi" aria-hidden="true">
-                    <use xlink:href="#chevron-right"></use>
-                </svg> </a> <a class="icon-link" href="#">
-                Buy
-                <svg class="bi" aria-hidden="true">
-                    <use xlink:href="#chevron-right"></use>
-                </svg> </a> </div>
+        <h1 class="display-3 fw-bold text-white"></h1>
+        <h3 class="fw-normal text-muted mb-3"></h3>
+        
     </div>
     <div class="product-device shadow-sm d-none d-md-block"></div>
     <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
 </div>
 
+
+<div class="text-center my-5">
+  <h1 class="font heading">
+    One-of-a-Kind, Just Like Dada ki Kahani.
+  </h1>
+  <h3 class="font heading-2">Handcrafted by Indian Dadas — Powered by Chai & Love.</h3>
+</div>
+{% if alert %}
+<div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+  <strong>Heads up!</strong> {{ alert }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
 <div class="container">
   <div class="row">
     {% for product in products %}
-      <div class="col-md-4 mb-4">
-        <div class="card h-100">
-          <img src="{{ product.image_url }}" class="card-img-top" alt="{{ product.title }}">
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">{{ product.price }}</h5>
-            <p class="card-text">{{ product.description }}</p>
-            <a href="{{url_for('add_to_cart' , product_id=product.id)}}" class="btn btn-primary mt-auto">{{ product.material }}</a>
-          </div>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+      <!-- Fixed height card -->
+      <div class="card h-100 d-flex flex-column shadow-sm">
+
+        <!-- IMAGE: large fixed area -->
+        <div class="ratio ratio-4x3">
+          <img src="{{ product.image_url }}" class="card-img-top h-100 w-100" style="object-fit: cover;"
+            alt="{{ product.title }}">
         </div>
+
+        <!-- TEXT: small area below -->
+        <div class="card-body p-2 d-flex flex-column" style="height: 8rem;">
+          <h5 class="card-title mb-1">Rs.{{ product.price }}</h5>
+          <p class="card-text small text-truncate mb-2">
+            {{ product.product_name }}<br>
+            Mateiral:{{ product.material}}
+          </p>
+          {% if current_user.is_authenticated %}
+          <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-primary btn-sm mt-auto">
+            Add to cart
+          </a>
+          {% else %}
+
+
+          <!-- Form submits to /alert -->
+          <form action="{{ url_for('show_alert') }}" method="POST">
+            <button type="submit" class="btn btn-primary btn-sm w-100">Add to cart</button>
+          </form>
+          {% endif %}
+
+          <!-- Alert Message -->
+
+
+        </div>
+
       </div>
+    </div>
     {% endfor %}
+
   </div>
 </div>
+{% include "footer.html" %}

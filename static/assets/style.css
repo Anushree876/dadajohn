@@ -1,0 +1,33 @@
+body {
+font-family:  Share Tech;
+    background-color: #F5ECD5;}
+  /* margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: linear-gradient(-45deg, #e0eafc, #cfdef3, #dde1e7, #f7f7f7);
+  background-size: 300% 300%;
+  animation: gradientShift 15s ease infinite;
+  font-family:'Montserrat', 'Segoe UI', sans-serif;;
+  color: #333;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+} */
+
+.card{
+    border-radius: 25px;
+}
+
+.heading{
+    font-family: PT Serif ;
+}
+
