@@ -2,26 +2,24 @@
 
 <div class="container my-4">
   <div class="row">
-  
+
     <!-- Products List -->
     <div class="col-lg-8 mb-4">
       {% for item in items %}
       <div class="card mb-3">
         <div class="row g-0 align-items-center">
           <div class="col-md-4 d-flex justify-content-center">
-            <img src="{{ item.product.image_url }}" 
-                 class="img-fluid rounded-start" 
-                 alt="{{ item.product.name }}" 
-                 style="max-height: 120px; object-fit: contain;">
+            <img src="{{ item.product.image_url }}" class="img-fluid rounded-start" alt="{{ item.product.name }}">
           </div>
           <div class="col-md-8">
-            <div class="card-body">
+
+
+            <div class="card-body position-relative">
+              <a href="{{url_for('remove_cart_item',product_id=item.product.id,user_id=item.user.id) }}" class="btn btn-sm btn-danger position-absolute top-0 end-0 m-2 text-black">✘</a>
+                
               <h5 class="card-title">{{ item.product.name }}</h5>
               <p class="card-text mb-1">
                 Price: Rs.{{ item.product.price }}
-              </p>
-              <p class="card-text">
-                <small class="text-muted">Last updated 3 mins ago</small>
               </p>
             </div>
           </div>
@@ -47,5 +45,3 @@
 
   </div>
 </div>
-
-

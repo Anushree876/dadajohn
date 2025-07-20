@@ -7,34 +7,89 @@
     <title>Dadajohn</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link href="/static/assets/style.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+</head>
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dadajohn</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=PT+Serif&family=Share+Tech&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="/static/assets/style.css" rel="stylesheet">
+  <link rel="icon" href="{{ url_for('static', filename='images/logo1.png') }}" type="image/png">
+
 </head>
 
 <body>
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom"> <a href="/"
-            class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"> <svg
-                class="bi me-2" width="40" height="32" aria-hidden="true">
-                <use xlink:href="#bootstrap"></use>
-            </svg> <span class="fs-4">Simple header</span> </a>
-        <ul class="nav nav-pills">
-            <li class="nav-item"><a href="{{url_for('home_page')}}" class="nav-link active" aria-current="page">Home</a></li>
-            {% if not current_user.is_authenticated %}
-            <li class="nav-item"><a href="{{url_for('signin_page')}}" class="nav-link">Sign in</a></li>
-            <li class="nav-item"><a href="{{url_for('login_page')}}" class="nav-link">Log in</a></li>
-            {%else%}
-            <li class="nav-item"><a href="{{url_for('logout')}}" class="nav-link">Log out</a></li>
-            {% endif %}
 
-            {% if current_user.id==1 and current_user.is_authenticated %}
-            <li class="nav-item"><a href="{{url_for('addproduct_page')}}" class="nav-link">Add</a></li>
-            {% endif %}
-            <li class="nav-item"><a href="{{url_for('cart_preview_page')}}" class="nav-link">
-                <img src="/static/images/cart3.svg">
-                </a></li>
-        </ul>
-    </header>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
-        crossorigin="anonymous"></script>
+  <!-- Dark Navbar -->
+  <header class="d-flex flex-wrap justify-content-center py-3 bg-light border-bottom sticky-top text-white">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center">
+
+      <!-- Logo and Brand Name -->
+      <a href="/" class="d-flex align-items-center text-black text-decoration-none">
+        <img src="/static/images/logo1.png" alt="Dadajohn logo" class="me-3" style="height: 40px;">
+        <span class="fs-4 heading">दादाJohn</span>
+      </a>
+
+      <!-- Navigation Menu -->
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a href="{{url_for('home_page')}}" class="nav-link text-black active" aria-current="page">Home</a>
+        </li>
+
+        {% if not current_user.is_authenticated %}
+        <li class="nav-item">
+          <a href="{{url_for('signin_page')}}" class="nav-link text-black">Sign in</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{url_for('login_page')}}" class="nav-link text-black">Log in</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a href="{{url_for('logout')}}" class="nav-link text-black">Log out</a>
+        </li>
+        {% endif %}
+
+        {% if current_user.id == 1 and current_user.is_authenticated %}
+        <li class="nav-item">
+          <a href="{{url_for('addproduct_page')}}" class="nav-link text-black">Add</a>
+        </li>
+        {% endif %}
+
+        {% if current_user.is_authenticated %}
+        <li class="nav-item">
+          <a href="{{url_for('cart_preview_page')}}" class="nav-link text-black">
+            <img src="/static/images/cart3.svg" alt="Cart" style="height: 20px;">
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </header>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
