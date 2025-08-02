@@ -3,7 +3,7 @@ Flask-WTF
 WTForms
 email-validator
 Flask-Login
-Flask-Bootstrap5
+flask-bootstrap5
 Flask-SQLAlchemy
 SQLAlchemy
 Flask-CKEditor

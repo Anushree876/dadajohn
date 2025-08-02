@@ -7,7 +7,7 @@ from sqlalchemy import Integer,String,Text,ForeignKey
 from werkzeug.security import generate_password_hash,check_password_hash
 from dotenv import load_dotenv
 from forms import LoginForm,RegisterForm,AddProduct
-from flask_bootstrap import Bootstrap5
+from flask_bootstrap5 import Bootstrap as Bootstrap5
 from flask_ckeditor import CKEditor
 from functools import wraps
 import stripe
