@@ -11,3 +11,5 @@ python-dotenv
 stripe
 Werkzeug
 gunicorn==21.2.0
+psycopg2
+bleach
